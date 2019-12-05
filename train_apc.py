@@ -48,8 +48,8 @@ def main():
   parser.add_argument("--experiment_name", default="foo", type=str, help="Name of this experiment")
   parser.add_argument("--store_path", default="./logs", type=str, help="Where to save the trained models and logs")
   parser.add_argument("--librispeech_path", default="./librispeech_data/preprocessed", type=str, help="Path to the librispeech directory")
-  parser.add_argument("--training_set", default="train-clean-360", type="str", help="Name of the training set file")
-  parser.add_argument("--dev_set", default="'dev-clean'", type="str", help="Name of the dev set file")
+  parser.add_argument("--training_set", default="train-clean-360", type=str, help="Name of the training set file")
+  parser.add_argument("--dev_set", default="'dev-clean'", type=str, help="Name of the dev set file")
 
   config = parser.parse_args()
 

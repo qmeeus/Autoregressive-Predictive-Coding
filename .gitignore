@@ -2,3 +2,4 @@
 data/
 librispeech_data/
 __pycache__/
+logs/

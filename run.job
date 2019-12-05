@@ -1,0 +1,39 @@
+#Normal execution
+Universe = vanilla
+
+#I need just one CPU (which is the default)
+RequestCpus    = 1
+#I need 3 GBytes of RAM (resident memory)
+RequestMemory  = 3G
+#It will not run longer than 15 minutes
++RequestWalltime = 900
+#I need one GPU
+Request_GPUs = 1
+
+# Run only on Visics machines with a GPU with 1GB of RAM or more
+Requirements = ( machineowner == "PSI/Spraak"  ) && ( CUDAGlobalMemoryMb > 1024  )
+
+#I'm a nice person, I think...
+NiceUser = true
+#Mail me only if something is wrong
+Notification = Error
+
+# Start directory
+Initialdir = /users/spraak/qmeeus/Documents/repos/Autoregressive-Predictive-Coding 
+
+# Timing
+Executable = /users/spraak/qmeeus/bin/anaconda3/bin/python
+
+# These are the arguments
+Arguments = train_apc.py --training_set dev-clean-hires-norm-blogmel --dev_set dev-clean-hires-norm-blogmel 
+
+#Output of condors handling of the jobs, will be in 'initialdir'
+Log = logs/condor_cuda.log
+#Standard output of the 'executable', in 'initialdir'
+Output = logs/condor_cuda.out
+#Standard error of the 'executable', in 'initialdir'
+Error = logs/condor_cuda.err
+#Standard error of the 'executable', in 'initialdir'
+
+# Start just 1 instance of the job
+Queue 1

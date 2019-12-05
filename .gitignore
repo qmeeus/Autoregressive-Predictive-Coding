@@ -1,3 +1,4 @@
 .idea/
 data/
 librispeech_data/
+__pycache__/

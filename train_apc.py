@@ -48,6 +48,8 @@ def main():
   parser.add_argument("--experiment_name", default="foo", type=str, help="Name of this experiment")
   parser.add_argument("--store_path", default="./logs", type=str, help="Where to save the trained models and logs")
   parser.add_argument("--librispeech_path", default="./librispeech_data/preprocessed", type=str, help="Path to the librispeech directory")
+  parser.add_argument("--training_set", default="train-clean-360", type="str", help="Name of the training set file")
+  parser.add_argument("--dev_set", default="'dev-clean'", type="str", help="Name of the dev set file")
 
   config = parser.parse_args()
 
@@ -117,11 +119,11 @@ def main():
   tensorboard_logger.configure(
     os.path.join(model_dir, config.experiment_name + '.tb_log'))
 
-  train_set = LibriSpeech(os.path.join(config.librispeech_path, 'train-clean-360'))
+  train_set = LibriSpeech(os.path.join(config.librispeech_path, config.training_set))
   train_data_loader = data.DataLoader(
     train_set, batch_size=config.batch_size, num_workers=config.load_data_workers, shuffle=True)
 
-  val_set = LibriSpeech(os.path.join(config.librispeech_path, 'dev-clean'))
+  val_set = LibriSpeech(os.path.join(config.librispeech_path, config.dev_set))
   val_data_loader = data.DataLoader(
     val_set, batch_size=config.batch_size, num_workers=config.load_data_workers, shuffle=False)
 
